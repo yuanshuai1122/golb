@@ -1,0 +1,117 @@
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /static/*filepath         --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (4 handlers)
+[GIN-debug] HEAD   /static/*filepath         --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (4 handlers)
+[GIN-debug] GET    /article/showArticleCount --> GIN/controllers/Article.ArticleController.ShowArticleCount-fm (4 handlers)
+[GIN-debug] GET    /article/showAllArticleInfo --> GIN/controllers/Article.ArticleController.ShowAll-fm (4 handlers)
+[GIN-debug] GET    /article/search/pass      --> GIN/controllers/Article.ArticleController.SearchPass-fm (4 handlers)
+[GIN-debug] GET    /article/byClassifyId     --> GIN/controllers/Article.ArticleController.SearchByClassifyId-fm (4 handlers)
+[GIN-debug] GET    /article/search/title     --> GIN/controllers/Article.ArticleController.SearchTitle-fm (4 handlers)
+[GIN-debug] GET    /article/page/byUserType  --> GIN/controllers/Article.ArticleController.SearchbyUserType-fm (4 handlers)
+[GIN-debug] POST   /article/insertArticleInfo --> GIN/controllers/Article.ArticleController.Add-fm (4 handlers)
+[GIN-debug] POST   /article/updateArticleInfo --> GIN/controllers/Article.ArticleController.Edit-fm (4 handlers)
+[GIN-debug] DELETE /article/delete           --> GIN/controllers/Article.ArticleController.Delete-fm (4 handlers)
+[GIN-debug] GET    /article/showArticleCountByUserId --> GIN/controllers/Article.ArticleController.ShowArticleCountByUserId-fm (4 handlers)
+[GIN-debug] GET    /article/showArticleInfo  --> GIN/controllers/Article.ArticleController.ShowArticleInfo-fm (4 handlers)
+[GIN-debug] GET    /article/updateArticleClick --> GIN/controllers/Article.ArticleController.UpdateArticleClick-fm (4 handlers)
+[GIN-debug] GET    /article/updateArticlePass --> GIN/controllers/Article.ArticleController.UpdateArticlePass-fm (4 handlers)
+[GIN-debug] GET    /article/page/showAll     --> GIN/controllers/Article.ArticleController.ShowAllPass-fm (4 handlers)
+[GIN-debug] DELETE /classify/delete          --> GIN/controllers/Classify.ClassifyController.Delete-fm (4 handlers)
+[GIN-debug] POST   /classify/insert          --> GIN/controllers/Classify.ClassifyController.Insert-fm (4 handlers)
+[GIN-debug] GET    /classify/showAllClassifyInfo --> GIN/controllers/Classify.ClassifyController.ShowAllClassifyInfo-fm (4 handlers)
+[GIN-debug] GET    /classify/showClassifyInfoByClassifyId --> GIN/controllers/Classify.ClassifyController.ShowClassifyInfoByClassifyId-fm (4 handlers)
+[GIN-debug] GET    /classify/updateArticleNumberByClassifyId --> GIN/controllers/Classify.ClassifyController.UpdateArticleNumberByClassifyId-fm (4 handlers)
+[GIN-debug] GET    /classify/updateArticleNumberByClassifyId2 --> GIN/controllers/Classify.ClassifyController.UpdateArticleNumberByClassifyId2-fm (4 handlers)
+[GIN-debug] POST   /classify/update          --> GIN/controllers/Classify.ClassifyController.Updata-fm (4 handlers)
+[GIN-debug] DELETE /comment/delete           --> GIN/controllers/Comment.CommentController.Delete-fm (4 handlers)
+[GIN-debug] DELETE /comment/deleteByArticleId --> GIN/controllers/Comment.CommentController.DeleteByArticleId-fm (4 handlers)
+[GIN-debug] POST   /comment/insertCommentInfo --> GIN/controllers/Comment.CommentController.InsertCommentInfo-fm (4 handlers)
+[GIN-debug] GET    /comment/showAllComment   --> GIN/controllers/Comment.CommentController.ShowAllComment-fm (4 handlers)
+[GIN-debug] GET    /comment/showCommentByArticleId --> GIN/controllers/Comment.CommentController.ShowCommentByArticleId-fm (4 handlers)
+[GIN-debug] GET    /comment/count            --> GIN/controllers/Comment.CommentController.GetCount-fm (4 handlers)
+[GIN-debug] GET    /comment/page/byUserType  --> GIN/controllers/Comment.CommentController.GetCountByUserType-fm (4 handlers)
+[GIN-debug] DELETE /message/delete           --> GIN/controllers/Message.MessageController.Delete-fm (4 handlers)
+[GIN-debug] POST   /message/insert           --> GIN/controllers/Message.MessageController.Insert-fm (4 handlers)
+[GIN-debug] GET    /message/pageShow         --> GIN/controllers/Message.MessageController.ShowmessageByPage-fm (4 handlers)
+[GIN-debug] POST   /message/updateMessageReply --> GIN/controllers/Message.MessageController.UpdateMessageReply-fm (4 handlers)
+[GIN-debug] DELETE /url/delete               --> GIN/controllers/Url.UrlController.Delete-fm (4 handlers)
+[GIN-debug] POST   /url/insert               --> GIN/controllers/Url.UrlController.Insert-fm (4 handlers)
+[GIN-debug] GET    /url/page/auditScreening  --> GIN/controllers/Url.UrlController.AuditScreening-fm (4 handlers)
+[GIN-debug] GET    /url/page/findby          --> GIN/controllers/Url.UrlController.Findby-fm (4 handlers)
+[GIN-debug] GET    /url/page/showAllUrlInfo  --> GIN/controllers/Url.UrlController.ShowAllUrlInfo-fm (4 handlers)
+[GIN-debug] GET    /url/updateUrlPass        --> GIN/controllers/Url.UrlController.UpdateUrlPass-fm (4 handlers)
+[GIN-debug] GET    /email/sendEmail          --> GIN/controllers/Email.EmailController.SendEmail-fm (4 handlers)
+[GIN-debug] POST   /upload/thumbnailUpload   --> GIN/controllers/Upload.UploadController.ThumbnailUpload-fm (4 handlers)
+[GIN-debug] POST   /upload/advertisingImgUpload --> GIN/controllers/Upload.UploadController.AdvertisingImgUpload-fm (4 handlers)
+[GIN-debug] POST   /upload/articleImgUpload  --> GIN/controllers/Upload.UploadController.ArticleImgUpload-fm (4 handlers)
+[GIN-debug] POST   /upload/articleVideoUpload --> GIN/controllers/Upload.UploadController.ArticleVideoUpload-fm (4 handlers)
+[GIN-debug] POST   /upload/fileUpload        --> GIN/controllers/Upload.UploadController.FileUpload-fm (4 handlers)
+[GIN-debug] POST   /upload/userIcon          --> GIN/controllers/Upload.UploadController.UserIcon-fm (4 handlers)
+[GIN-debug] GET    /systemSetup/showAllSystemSetup --> GIN/controllers/SystemSetup.SystemSetupController.ShowAllSystemSetup-fm (4 handlers)
+[GIN-debug] POST   /systemSetup/updateSystemSetup --> GIN/controllers/SystemSetup.SystemSetupController.UpdateSystemSetup-fm (4 handlers)
+[GIN-debug] GET    /login/insertLoginInfo    --> GIN/controllers/Login.LoginController.InsertLoginInfo-fm (4 handlers)
+[GIN-debug] GET    /login/tologin            --> GIN/controllers/Login.LoginController.Login-fm (4 handlers)
+[GIN-debug] DELETE /user/delete              --> GIN/controllers/User.UserController.Delete-fm (4 handlers)
+[GIN-debug] GET    /user/showUserByUserId    --> GIN/controllers/User.UserController.ShowUserByUserId-fm (4 handlers)
+[GIN-debug] GET    /user/showUserCount       --> GIN/controllers/User.UserController.ShowUserCount-fm (4 handlers)
+[GIN-debug] GET    /user/page/findby         --> GIN/controllers/User.UserController.Findby-fm (4 handlers)
+[GIN-debug] POST   /user/updateUserBasicsInfo --> GIN/controllers/User.UserController.UpdateUserBasicsInfo-fm (4 handlers)
+[GIN-debug] GET    /user/updateUserPass      --> GIN/controllers/User.UserController.UpdateUserPass-fm (4 handlers)
+[GIN-debug] GET    /user/showUserName        --> GIN/controllers/User.UserController.ShowUserName-fm (4 handlers)
+[GIN-debug] GET    /user/searchEmail         --> GIN/controllers/User.UserController.SearchEmail-fm (4 handlers)
+[GIN-debug] POST   /user/insertRegisterInfo  --> GIN/controllers/User.UserController.InsertRegisterInfo-fm (4 handlers)
+[GIN-debug] POST   /carouseMap/updateCarouseMap --> GIN/controllers/CarouseMap.CarouseMapController.UpdateCarouseMap-fm (4 handlers)
+[GIN-debug] GET    /carouseMap/searchCarouseMap --> GIN/controllers/CarouseMap.CarouseMapController.SearchCarouseMap-fm (4 handlers)
+[GIN-debug] DELETE /text/delete              --> GIN/controllers/Text.TextController.Delete-fm (4 handlers)
+[GIN-debug] POST   /text/insert              --> GIN/controllers/Text.TextController.Insert-fm (4 handlers)
+[GIN-debug] GET    /text/getall              --> GIN/controllers/Text.TextController.AuditScreening-fm (4 handlers)
+[GIN-debug] DELETE /text/deleteall           --> GIN/controllers/Text.TextController.DeleteAll-fm (4 handlers)
+[GIN-debug] DELETE /ip/delete                --> GIN/controllers/Ip.IpController.Delete-fm (4 handlers)
+[GIN-debug] POST   /ip/insert                --> GIN/controllers/Ip.IpController.Insert-fm (4 handlers)
+[GIN-debug] GET    /ip/getall                --> GIN/controllers/Ip.IpController.GetPage-fm (4 handlers)
+[GIN-debug] DELETE /ip/deleteall             --> GIN/controllers/Ip.IpController.DeleteAll-fm (4 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :520
+[GIN] 2023/01/02 - 16:37:00 | 204 |          13µs |             ::1 | OPTIONS  "/ip/delete?id=2"
+[GIN] 2023/01/02 - 16:37:01 | 200 |    151.4015ms |             ::1 | DELETE   "/ip/delete?id=2"
+[GIN] 2023/01/02 - 16:37:01 | 200 |     63.9263ms |             ::1 | GET      "/ip/getall?currentPage=1&pageSize=10"
+[GIN] 2023/01/02 - 16:37:02 | 204 |            0s |             ::1 | OPTIONS  "/ip/delete?id=3"
+[GIN] 2023/01/02 - 16:37:02 | 200 |    159.3303ms |             ::1 | DELETE   "/ip/delete?id=3"
+[GIN] 2023/01/02 - 16:37:02 | 200 |     81.1291ms |             ::1 | GET      "/ip/getall?currentPage=1&pageSize=10"
+[GIN] 2023/01/02 - 16:37:05 | 200 |    134.6744ms |             ::1 | GET      "/ip/getall?currentPage=1&pageSize=10"
+[GIN] 2023/01/02 - 16:37:21 | 200 |     64.2021ms |             ::1 | GET      "/ip/getall?currentPage=1&pageSize=10"
+[GIN] 2023/01/02 - 16:37:22 | 200 |     96.6009ms |             ::1 | GET      "/ip/getall?currentPage=1&pageSize=10"
+[GIN] 2023/01/02 - 16:38:22 | 200 |     63.9175ms |             ::1 | GET      "/ip/getall?currentPage=1&pageSize=10"
+[GIN] 2023/01/02 - 16:39:27 | 200 |     62.5571ms |             ::1 | GET      "/user/showUserCount"
+[GIN] 2023/01/02 - 16:39:27 | 200 |    150.1511ms |             ::1 | GET      "/classify/showAllClassifyInfo"
+[GIN] 2023/01/02 - 16:39:27 | 200 |    159.1431ms |             ::1 | GET      "/comment/count"
+[GIN] 2023/01/02 - 16:39:27 | 200 |    172.4046ms |             ::1 | GET      "/article/showAllArticleInfo"
+[GIN] 2023/01/02 - 16:39:27 | 200 |    229.8942ms |             ::1 | GET      "/article/showArticleCount"
+[GIN] 2023/01/02 - 16:39:31 | 200 |     38.0963ms |             ::1 | GET      "/systemSetup/showAllSystemSetup"
+[GIN] 2023/01/02 - 16:39:31 | 200 |     54.4632ms |             ::1 | GET      "/user/showUserCount"
+[GIN] 2023/01/02 - 16:39:31 | 404 |            0s |             ::1 | GET      "/static/userIcon/1665192663091_avatar.jpg"
+[GIN] 2023/01/02 - 16:39:31 | 200 |    143.8313ms |             ::1 | GET      "/article/showArticleCountByUserId?userId=1"
+[GIN] 2023/01/02 - 16:39:31 | 200 |    175.3787ms |             ::1 | GET      "/classify/showAllClassifyInfo"
+[GIN] 2023/01/02 - 16:39:31 | 200 |    200.6891ms |             ::1 | GET      "/article/showAllArticleInfo"
+[GIN] 2023/01/02 - 16:39:31 | 200 |    230.1816ms |             ::1 | GET      "/article/showArticleCount"
+[GIN] 2023/01/02 - 16:39:31 | 200 |    231.2938ms |             ::1 | GET      "/comment/count"
+[GIN] 2023/01/02 - 16:39:46 | 200 |    127.8871ms |             ::1 | GET      "/systemSetup/showAllSystemSetup"
+[GIN] 2023/01/02 - 16:39:46 | 200 |     26.2023ms |             ::1 | GET      "/classify/showAllClassifyInfo"
+[GIN] 2023/01/02 - 16:39:46 | 200 |     96.5707ms |             ::1 | GET      "/text/getall?currentPage=1&pageSize=9999999"
+[GIN] 2023/01/02 - 16:39:46 | 404 |       993.4µs |             ::1 | GET      "/static/userIcon/1665192663091_avatar.jpg"
+[GIN] 2023/01/02 - 16:39:46 | 404 |            0s |             ::1 | GET      "/static/thumbnail/ip.jpg"
+[GIN] 2023/01/02 - 16:39:46 | 404 |      1.0011ms |             ::1 | GET      "/static/thumbnail/denglong.jpg"
+[GIN] 2023/01/02 - 16:39:46 | 404 |            0s |             ::1 | GET      "/static/thumbnail/banner01.png"
+[GIN] 2023/01/02 - 16:39:46 | 404 |            0s |             ::1 | GET      "/static/advertisingImg/tu.jpg"
+[GIN] 2023/01/02 - 16:39:46 | 404 |     37.8984ms |             ::1 | GET      "/static/thumbnail/banner06.png"
+[GIN] 2023/01/02 - 16:39:46 | 404 |            0s |             ::1 | GET      "/static/thumbnail/4f8c4ce8a0ee4e90bc85e0d363ebd658.png"
+[GIN] 2023/01/02 - 16:39:46 | 200 |    267.5007ms |             ::1 | GET      "/carouseMap/searchCarouseMap"
+[GIN] 2023/01/02 - 16:39:46 | 200 |    305.8741ms |             ::1 | GET      "/article/showAllArticleInfo"
+[GIN] 2023/01/02 - 16:39:46 | 200 |     354.328ms |             ::1 | GET      "/article/showArticleCount"
+[GIN] 2023/01/02 - 16:39:47 | 204 |            0s |             ::1 | OPTIONS  "/ip/insert"
+[GIN] 2023/01/02 - 16:39:47 | 200 |    116.1737ms |             ::1 | POST     "/ip/insert"

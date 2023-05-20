@@ -1,0 +1,7 @@
+mysql:
+  user: root
+  password: MOMObinbin0419
+  databaseIP: localhost
+  databasePort: 3306
+  databaseName: bpvank
+
