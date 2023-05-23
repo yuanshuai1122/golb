@@ -7,7 +7,7 @@ import { CardActionArea } from '@mui/material';
 
 export default function BlogCard() {
     return (
-        <Card sx={{ display: 'inline-block', mx: '5px', maxWidth: 345 }}>
+        <Card sx={{ display: 'inline-block', mx: '10px', maxWidth: 300 }}>
             <CardActionArea>
                 <CardMedia
                     component="img"

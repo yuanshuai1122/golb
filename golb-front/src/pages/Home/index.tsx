@@ -5,6 +5,7 @@ import BlogPagination from "../../components/BlogPagination";
 const Home = () => {
     return (
         <div>
+            <br/>
             <BlogCard/>
             <BlogCard/>
             <BlogCard/>
