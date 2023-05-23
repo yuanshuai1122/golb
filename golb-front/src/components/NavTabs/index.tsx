@@ -2,21 +2,24 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+import {Link} from "react-router-dom";
 
 interface LinkTabProps {
-    label?: string;
-    href?: string;
+    label: string;
+    href: string;
 }
 
 function LinkTab(props: LinkTabProps) {
+
     return (
-        <Tab
-            component="a"
-            onClick={(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-                event.preventDefault();
-            }}
-            {...props}
-        />
+        <>
+            <Tab
+                component="a"
+                onClick={(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+                    event.preventDefault();
+                }}
+                {...props} />
+        </>
     );
 }
 
@@ -30,9 +33,9 @@ export default function NavTabs() {
     return (
         <Box sx={{ width: '100%' }}>
             <Tabs value={value} onChange={handleChange} aria-label="nav tabs example">
-                <LinkTab label="首页" href="/drafts" />
-                <LinkTab label="归档" href="/trash" />
-                <LinkTab label="关于我" href="/spam" />
+                <LinkTab label="首页" href="/" />
+                <LinkTab label="归档" href="/archives" />
+                <LinkTab label="关于我" href="/about" />
             </Tabs>
         </Box>
     );
