@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 import {Link, Route, Routes} from "react-router-dom";
 import Home from "../../pages/Home";
 import About from "../../pages/About";
+import Archives from "../../pages/Archives";
 
 const App = () => {
     return (
@@ -14,10 +15,9 @@ const App = () => {
                 <CssBaseline />
                     <Container maxWidth="lg">
                         <NavTabs/>
-                        <Link className='list-group-item' to="/about">About</Link>
-                        <Link className='list-group-item' to="/">Home</Link>
                         <Routes>
                             <Route path="/" element={<Home />}></Route>
+                            <Route path="/archives" element={<Archives />}></Route>
                             <Route path="/about" caseSensitive element={<About/>}></Route>
                         </Routes>
                     </Container>

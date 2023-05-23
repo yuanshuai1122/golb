@@ -2,40 +2,36 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import {Link} from "react-router-dom";
+import {Link, matchPath, useLocation} from "react-router-dom";
 
-interface LinkTabProps {
-    label: string;
-    href: string;
-}
 
-function LinkTab(props: LinkTabProps) {
 
-    return (
-        <>
-            <Tab
-                component="a"
-                onClick={(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-                    event.preventDefault();
-                }}
-                {...props} />
-        </>
-    );
+
+function useRouteMatch(patterns: readonly string[]) {
+    const { pathname } = useLocation();
+
+    for (let i = 0; i < patterns.length; i += 1) {
+        const pattern = patterns[i];
+        const possibleMatch = matchPath(pattern, pathname);
+        if (possibleMatch !== null) {
+            return possibleMatch;
+        }
+    }
+
+    return null;
 }
 
 export default function NavTabs() {
-    const [value, setValue] = React.useState(0);
 
-    const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-        setValue(newValue);
-    };
+    const routeMatch = useRouteMatch(['/', '/archives', '/about']);
+    const currentTab = routeMatch?.pattern?.path;
 
     return (
         <Box sx={{ width: '100%' }}>
-            <Tabs value={value} onChange={handleChange} aria-label="nav tabs example">
-                <LinkTab label="首页" href="/" />
-                <LinkTab label="归档" href="/archives" />
-                <LinkTab label="关于我" href="/about" />
+            <Tabs value={currentTab}>
+                <Tab label="首页" value="/" to="/" component={Link} />
+                <Tab label="归档" value="/archives" to="/archives" component={Link} />
+                <Tab label="关于我" value="/about" to="/about" component={Link} />
             </Tabs>
         </Box>
     );
