@@ -1,9 +1,10 @@
 import React from 'react';
+import BlogTimeLine from "../../components/BlogTimeLine";
 
 const Archives = () => {
     return (
         <div>
-            <h1>归档</h1>
+            <BlogTimeLine/>
         </div>
     );
 };

@@ -29,7 +29,7 @@ func InitDB() {
 			LogLevel:      logger.Info, // 级别
 			Colorful:      true,
 		})
-	dsn := `root:MOMObinbin0419@tcp(82.157.47.194:3306)/bpvank?charset=utf8mb4&parseTime=True&loc=Local`
+	dsn := `root:123456@tcp(localhost:3306)/golb?charset=utf8mb4&parseTime=True&loc=Local`
 	// dsn := viper.GetString("mysql.user") + ":" +
 	// 	viper.GetString("mysql.password") +
 	// 	"@tcp(" + viper.GetString("mysql.databaseIP") + ": " +

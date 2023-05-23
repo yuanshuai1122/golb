@@ -28,7 +28,7 @@ export default function NavTabs() {
 
     return (
         <Box sx={{ width: '100%' }}>
-            <Tabs value={currentTab}>
+            <Tabs value={currentTab} centered>
                 <Tab label="首页" value="/" to="/" component={Link} />
                 <Tab label="归档" value="/archives" to="/archives" component={Link} />
                 <Tab label="关于我" value="/about" to="/about" component={Link} />

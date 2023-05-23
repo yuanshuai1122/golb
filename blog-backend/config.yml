@@ -1,7 +1,7 @@
 mysql:
   user: root
-  password: MOMObinbin0419
+  password: 123456
   databaseIP: localhost
   databasePort: 3306
-  databaseName: bpvank
+  databaseName: golb
 
