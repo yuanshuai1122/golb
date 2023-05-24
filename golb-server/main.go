@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"golb/golb-server/routers"
 	"golb/golb-server/utils"
 )
 
@@ -12,5 +13,12 @@ func main() {
 	utils.InitDB()
 	r := gin.Default()
 
-	r.Run(":8088")
+	// 路由组配置
+	// 文章相关
+	routers.ArticleRoutersInit(r)
+
+	err := r.Run(":8088")
+	if err != nil {
+		return
+	}
 }
