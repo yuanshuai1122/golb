@@ -1,6 +1,9 @@
 package models
 
-import "golb/golb-server/utils"
+import (
+	"golb/golb-server/utils"
+	"time"
+)
 
 // Articles 文章实体
 type Articles struct {
@@ -16,6 +19,10 @@ type Articles struct {
 	Abstract string `gorm:"column:abstract" json:"abstract"`
 	// 状态 normal：正常 deleted：已删除
 	Status string `gorm:"column:status" json:"status"`
+	// 创建时间
+	CreateTime time.Time `gorm:"column:create_time" json:"createTime"`
+	// 修改时间
+	UpdateTime time.Time `gorm:"column:update_time" json:"updateTime"`
 }
 
 // TableName 绑定表名
