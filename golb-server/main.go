@@ -16,6 +16,8 @@ func main() {
 	// 路由组配置
 	// 文章相关
 	routers.ArticleRoutersInit(r)
+	// 归档相关
+	routers.ArchiveRoutersInit(r)
 
 	err := r.Run(":8088")
 	if err != nil {
