@@ -30,12 +30,27 @@ func (Articles) TableName() string {
 	return "articles"
 }
 
-// GetArticlesList 获取文章列表（不分页）
-func (Articles) GetArticlesList() interface{} {
+// GetArticlesList 获取文章列表（分页）
+func (Articles) GetArticlesList(pageNum int64, pageSize int64, keywords string) interface{} {
+	offset := (pageNum - 1) * pageSize
+	var count int64
 	var articleList []Articles
-	if err := utils.DB.Where("status = 'normal'").Find(&articleList).Error; err != nil {
+	// 查总数
+	if err := utils.DB.Where("(title LIKE ? or abstract LIKE ?) and status = ?", keywords+"%", keywords+"%", "normal").Find(&articleList).Count(&count).Error; err != nil {
+		return nil
+	}
+	// 分页查询
+	if err := utils.DB.Offset(int(offset)).Limit(int(pageSize)).Where("(title LIKE ? or abstract LIKE ?) and status = ?", keywords+"%", keywords+"%", "normal").Find(&articleList).Error; err != nil {
 		return nil
 	} else {
-		return articleList
+		totalPage := utils.ReturnTotalPage(count, pageSize)
+		return map[string]interface{}{
+			"pageNum":   pageNum,
+			"list":      articleList,
+			"pageSize":  pageSize,
+			"total":     count,
+			"totalPage": totalPage,
+		}
 	}
+
 }
