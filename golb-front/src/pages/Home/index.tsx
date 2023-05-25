@@ -4,9 +4,7 @@ import BlogList from "../../components/BlogList";
 const Home = () => {
     return (
         <div>
-            <br/>
             <BlogList/>
-            <br/>
         </div>
     );
 };
