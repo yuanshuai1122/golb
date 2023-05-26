@@ -6,6 +6,7 @@ import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineDot from '@mui/lab/TimelineDot';
 import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
+import {Pagination, Stack} from "@mui/material";
 
 export default function BlogTimeLine() {
     return (
@@ -50,6 +51,39 @@ export default function BlogTimeLine() {
                 </TimelineSeparator>
                 <TimelineContent>Repeat</TimelineContent>
             </TimelineItem>
+            <TimelineItem>
+                <TimelineOppositeContent color="text.secondary">
+                    9:00 am
+                </TimelineOppositeContent>
+                <TimelineSeparator>
+                    <TimelineDot />
+                    <TimelineConnector />
+                </TimelineSeparator>
+                <TimelineContent>Repeat</TimelineContent>
+            </TimelineItem>
+            <TimelineItem>
+                <TimelineOppositeContent color="text.secondary">
+                    9:00 am
+                </TimelineOppositeContent>
+                <TimelineSeparator>
+                    <TimelineDot />
+                    <TimelineConnector />
+                </TimelineSeparator>
+                <TimelineContent>Repeat</TimelineContent>
+            </TimelineItem>
+            <TimelineItem>
+                <TimelineOppositeContent color="text.secondary">
+                    9:00 am
+                </TimelineOppositeContent>
+                <TimelineSeparator>
+                    <TimelineDot />
+                    <TimelineConnector />
+                </TimelineSeparator>
+                <TimelineContent>Repeat</TimelineContent>
+            </TimelineItem>
+            <Stack sx={{alignItems: 'center'}} spacing={2}>
+                <Pagination count={10}/>
+            </Stack>
         </Timeline>
     );
 }

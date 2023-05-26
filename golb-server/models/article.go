@@ -25,6 +25,14 @@ type Articles struct {
 	UpdateTime time.Time `gorm:"column:update_time" json:"updateTime"`
 }
 
+// Archives 归档
+type Archives struct {
+	// 文章标题
+	Title string `gorm:"column:title" json:"title"`
+	// 创建时间
+	CreateTime time.Time `gorm:"column:create_time" json:"createTime"`
+}
+
 // TableName 绑定表名
 func (Articles) TableName() string {
 	return "articles"
@@ -52,5 +60,14 @@ func (Articles) GetArticlesList(pageNum int64, pageSize int64, keywords string) 
 			"totalPage": totalPage,
 		}
 	}
+}
 
+// GetArchivesList 获取归档列表
+func (Articles) GetArchivesList(pageNum int64, pageSize int64) interface{} {
+	offset := (pageNum - 1) * pageSize
+	var archivesList []Archives
+	if err := utils.DB.Table("articles").Select([]string{"title", "create_time"}).Where("status = ?", "normal").Order("create_time desc").Limit(int(pageSize)).Offset(int(offset)).Scan(&archivesList).Error; err != nil {
+		return nil
+	}
+	return archivesList
 }

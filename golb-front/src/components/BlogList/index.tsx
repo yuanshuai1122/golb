@@ -3,14 +3,15 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Skeleton from '@mui/material/Skeleton';
+import {Pagination, Stack} from "@mui/material";
 
 const data = [
     {
         src: 'https://i.ytimg.com/vi/pLqipJNItIo/hqdefault.jpg?sqp=-oaymwEYCNIBEHZIVfKriqkDCwgBFQAAiEIYAXAB&rs=AOn4CLBkklsyaw9FxDmMKapyBYCn9tbPNQ',
-        title: 'Don Diablo @ Tomorrowland Main Stage 2019 | Official…',
-        channel: 'Don Diablo',
-        views: '396k views',
-        createdAt: 'a week ago',
+        title: '标题',
+        channel: '作者',
+        views: '观看人数',
+        createdAt: '创建时间',
     },
     {
         src: 'https://i.ytimg.com/vi/_Uu12zY01ts/hqdefault.jpg?sqp=-oaymwEZCPYBEIoBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLCpX6Jan2rxrCAZxJYDXppTP4MoQA',
@@ -32,11 +33,11 @@ interface MediaProps {
     loading?: boolean;
 }
 
-function Media(props: MediaProps) {
+function BlogCard(props: MediaProps) {
     const { loading = false } = props;
 
     return (
-        <Grid container wrap="nowrap" >
+        <Grid container wrap="nowrap" sx={{justifyContent: 'center'}} >
             {(loading ? Array.from(new Array(3)) : data).map((item, index) => (
                 <Box key={index} sx={{ width: 210, marginRight: 0.5, my: 5 }}>
                     {item ? (
@@ -74,9 +75,16 @@ function Media(props: MediaProps) {
 
 export default function BlogList() {
     return (
-        <Box sx={{ overflow: 'hidden'}}>
-            <Media loading />
-            <Media />
-        </Box>
+        <>
+            <Box sx={{ overflow: 'hidden'}}>
+                <BlogCard loading />
+                <BlogCard />
+            </Box>
+            <Stack sx={{alignItems: 'center'}} spacing={2}>
+                <Pagination count={10}/>
+            </Stack>
+        </>
+
+
     );
 }
