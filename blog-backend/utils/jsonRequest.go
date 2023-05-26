@@ -16,7 +16,7 @@ const (
 	SEARCHPAGEFAILED int = 1006 //执行数据库删除失败
 )
 
-// 返回成功不带数据
+// Success 返回成功不带数据
 func Success(c *gin.Context) {
 	c.JSON(http.StatusOK, map[string]interface{}{
 		"code": SUCCESS,
@@ -24,7 +24,7 @@ func Success(c *gin.Context) {
 	})
 }
 
-// 返回成功带数据
+// SuccessData 返回成功带数据
 func SuccessData(c *gin.Context, v interface{}) {
 	c.JSON(http.StatusOK, map[string]interface{}{
 		"code": SUCCESS,
@@ -33,7 +33,7 @@ func SuccessData(c *gin.Context, v interface{}) {
 	})
 }
 
-// 返回失败 + 提示信息
+// Failed 返回失败 + 提示信息
 func Failed(c *gin.Context, v interface{}) {
 	c.JSON(http.StatusOK, map[string]interface{}{
 		"code": FAILED,
@@ -41,7 +41,7 @@ func Failed(c *gin.Context, v interface{}) {
 	})
 }
 
-// 返回失败 + 提示信息 + 状态码
+// FailedMsgAndCode 返回失败 + 提示信息 + 状态码
 func FailedMsgAndCode(c *gin.Context, v interface{}, x interface{}) {
 	c.JSON(http.StatusOK, map[string]interface{}{
 		"code": x,
@@ -49,7 +49,7 @@ func FailedMsgAndCode(c *gin.Context, v interface{}, x interface{}) {
 	})
 }
 
-// 执行数据库删除失败
+// DeleteFailed 执行数据库删除失败
 func DeleteFailed(c *gin.Context) {
 	c.JSON(http.StatusOK, map[string]interface{}{
 		"code": DELETEFAILED,
@@ -57,7 +57,7 @@ func DeleteFailed(c *gin.Context) {
 	})
 }
 
-// 执行数据库新增失败
+// AddFailed 执行数据库新增失败
 func AddFailed(c *gin.Context) {
 	c.JSON(http.StatusOK, map[string]interface{}{
 		"code": ADDFAILED,
@@ -65,7 +65,7 @@ func AddFailed(c *gin.Context) {
 	})
 }
 
-// ID为空
+// MissId ID为空
 func MissId(c *gin.Context) {
 	c.JSON(http.StatusOK, map[string]interface{}{
 		"code": MISSSID,
@@ -73,7 +73,7 @@ func MissId(c *gin.Context) {
 	})
 }
 
-// ID在数据库不存在
+// NoId ID在数据库不存在
 func NoId(c *gin.Context) {
 	c.JSON(http.StatusOK, map[string]interface{}{
 		"code": NOID,
@@ -81,7 +81,7 @@ func NoId(c *gin.Context) {
 	})
 }
 
-// 分页查询失败
+// SearchPageFaild 分页查询失败
 func SearchPageFaild(c *gin.Context) {
 	c.JSON(http.StatusOK, map[string]interface{}{
 		"code": SEARCHPAGEFAILED,
@@ -89,7 +89,7 @@ func SearchPageFaild(c *gin.Context) {
 	})
 }
 
-// Editer 上传图片专用返回格式
+// BackEditorImg Editer 上传图片专用返回格式
 func BackEditorImg(c *gin.Context, v interface{}) {
 	c.JSON(http.StatusOK, map[string]interface{}{
 		"error": 0,
