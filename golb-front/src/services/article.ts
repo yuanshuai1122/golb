@@ -7,4 +7,8 @@ import {BASE_URL} from "../constants";
  * @param pageSize
  * @param keywords
  */
-export const getArticlesList = (pageNum: number, pageSize: number, keywords: string): Promise<any> => request.get(`${BASE_URL}/articles/list`, {});
+export const getArticlesList = (pageNum: number, pageSize: number, keywords: string): Promise<any> => request.get(`${BASE_URL}/articles/list`, {
+    pageNum,
+    pageSize,
+    keywords
+});

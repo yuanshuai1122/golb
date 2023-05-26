@@ -1,7 +1,7 @@
 
 export const DEFAULT_NAME = 'demo';
 
-export const BASE_URL = '//localhost:8088';
+export const BASE_URL = '//api-blog.yuanshuai.vip';
 
 // 请求的数据类型
 export const CONTENT_TYPE = {
