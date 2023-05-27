@@ -7,6 +7,7 @@ import {Pagination, Stack} from "@mui/material";
 import {useEffect, useState} from "react";
 import {getArticlesList} from "../../services/article";
 import {IBlogList, IBlogRowsList} from "../../types/blog";
+import {dateFormat} from "../../utils/dateUtils";
 
 
 interface MediaProps {
@@ -18,17 +19,17 @@ function BlogCard(props: MediaProps) {
     const { loading = false, blogList } = props;
 
     return (
-        <Grid container wrap="nowrap" sx={{justifyContent: 'center'}} >
+        <Grid container wrap="nowrap" sx={{justifyContent: 'center'}} item spacing={3}>
             {(loading ? Array.from(new Array(3)) : blogList).map((item, index) => (
-                <Box key={index} sx={{ width: 210, marginRight: 0.5, my: 5 }}>
+                <Box key={index} sx={{ width: 210, marginRight: 1, marginLeft: 1, my: 5 }}>
                     {item ? (
                         <img
-                            style={{ width: 210, height: 118 }}
+                            style={{ width: 210, height: 140, borderRadius: 3}}
                             alt={item.title}
                             src={item.coverImg}
                         />
                     ) : (
-                        <Skeleton variant="rectangular" width={210} height={118} />
+                        <Skeleton variant="rectangular" width={210} height={100} />
                     )}
                     {item ? (
                         <Box sx={{ pr: 2 }}>
@@ -39,7 +40,7 @@ function BlogCard(props: MediaProps) {
                                 {item.channel}
                             </Typography>
                             <Typography variant="caption" color="text.secondary">
-                                {`${item.views} • ${item.createdAt}`}
+                                {`${item.views} 次浏览 • ${dateFormat(item.createTime, 'YYYY年MM月DD日')}`}
                             </Typography>
                         </Box>
                     ) : (
@@ -58,18 +59,10 @@ export default function BlogList() {
 
     const [blogRowsList, setBlogRowsList] = useState<IBlogRowsList[]>([]);
 
-    const [blogCardRows, setBlogCardRows] = useState<number>(2);
-
     useEffect(()=> {
         // 获取文章列表
         getArticlesList(1, 6, "").then(res => {
-            // 计算渲染行数
-            const rows: number = Math.ceil(res.data.total / 3 )
-            setBlogCardRows(rows)
-
             console.log(res.data.list)
-
-
             const blogRowsList: IBlogRowsList[] = [];
             // 切片
             let arrLen = 3;  //这里一行数组最多3个
@@ -98,13 +91,10 @@ export default function BlogList() {
     return (
         <>
             <Box sx={{ overflow: 'hidden'}}>
-
-                {/*<BlogCard loading />*/}
                 {
                     blogRowsList.map((item) => {
                         return <BlogCard blogList={item.blogList} />
                     })
-
                 }
             </Box>
             <Stack sx={{alignItems: 'center'}} spacing={2}>
