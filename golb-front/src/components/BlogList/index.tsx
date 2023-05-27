@@ -10,12 +10,45 @@ import {IBlogList, IBlogRowsList} from "../../types/blog";
 import {dateFormat} from "../../utils/dateUtils";
 
 
-interface MediaProps {
+/**
+ * 处理博客页数据
+ * @param data 数据源
+ */
+const handlePageData = (data: any) => {
+    const blogRowsList: IBlogRowsList[] = [];
+    // 切片
+    let arrLen = 3;  //这里一行数组最多3个
+    for (let i=0; i<data.length; i+=arrLen) {
+        const blogSlice = data.slice(i,i+arrLen)
+        const blogList: IBlogList[] = []
+        for (let blogSliceElement of blogSlice) {
+            const blog: IBlogList = {
+                coverImg: blogSliceElement.coverImg,
+                title: blogSliceElement.title,
+                userName: "aabb",
+                views: 100,
+                createTime: blogSliceElement.createTime
+            }
+            blogList.push(blog)
+        }
+        blogRowsList.push({
+            blogList: blogList
+        });
+    }
+
+    return blogRowsList;
+}
+
+/**
+ * 博客卡片组件
+ * @param props 参数
+ * @constructor
+ */
+interface BlogCardProps {
     loading?: boolean;
     blogList: IBlogList[]
 }
-
-function BlogCard(props: MediaProps) {
+function BlogCard(props: BlogCardProps) {
     const { loading = false, blogList } = props;
 
     return (
@@ -55,50 +88,57 @@ function BlogCard(props: MediaProps) {
     );
 }
 
-export default function BlogList() {
+/**
+ * 博客页面列表组件
+ * @constructor
+ */
+export default function BlogPageList() {
 
     const [blogRowsList, setBlogRowsList] = useState<IBlogRowsList[]>([]);
+    const [totalPages, setTotalPages] = useState<number>(0);
 
     useEffect(()=> {
         // 获取文章列表
         getArticlesList(1, 6, "").then(res => {
-            console.log(res.data.list)
-            const blogRowsList: IBlogRowsList[] = [];
-            // 切片
-            let arrLen = 3;  //这里一行数组最多3个
-            for (let i=0; i<res.data.list.length; i+=arrLen) {
-                const blogSlice = res.data.list.slice(i,i+arrLen)
-                const blogList: IBlogList[] = []
-                for (let blogSliceElement of blogSlice) {
-                    const blog: IBlogList = {
-                        coverImg: blogSliceElement.coverImg,
-                        title: blogSliceElement.title,
-                        channel: "aabb",
-                        views: 100,
-                        createTime: blogSliceElement.createTime
-                    }
-                    blogList.push(blog)
-                }
-                blogRowsList.push({
-                    blogList: blogList
-                });
-            }
-            setBlogRowsList(blogRowsList)
+            console.log(res.data)
+            // 总页数
+            setTotalPages(res.data.totalPage)
+            // 处理博客数据
+            const blogRows: IBlogRowsList[] = handlePageData(res.data.list)
+            setBlogRowsList(blogRows)
 
         })
     }, [])
+
+    // 分页handle
+    const handlePagination = (event: React.ChangeEvent<unknown>, page: number) => {
+        // 获取文章列表
+        getArticlesList(page, 6, "").then(res => {
+            console.log("翻页获取文章列表")
+            console.log(res.data)
+            // 总页数
+            setTotalPages(res.data.totalPage)
+            // 处理博客数据
+            const blogRows: IBlogRowsList[] = handlePageData(res.data.list)
+            setBlogRowsList(blogRows)
+
+        })
+    }
 
     return (
         <>
             <Box sx={{ overflow: 'hidden'}}>
                 {
-                    blogRowsList.map((item) => {
-                        return <BlogCard blogList={item.blogList} />
+                    blogRowsList.map((item, index) => {
+                        return <BlogCard key={index} blogList={item.blogList} />
                     })
                 }
             </Box>
             <Stack sx={{alignItems: 'center'}} spacing={2}>
-                <Pagination count={10}/>
+                <Pagination
+                    count={totalPages}
+                    onChange={handlePagination}
+                />
             </Stack>
         </>
 

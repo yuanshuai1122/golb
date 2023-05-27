@@ -13,7 +13,7 @@ const axiosCreate = axios.create();
 
 axiosCreate.defaults.timeout = 60000;
 axiosCreate.defaults.headers.common['Content-Type'] = CONTENT_TYPE.JSON;
-axiosCreate.defaults.withCredentials = true;
+//axiosCreate.defaults.withCredentials = true;
 
 
 axiosCreate.interceptors.response.use(
