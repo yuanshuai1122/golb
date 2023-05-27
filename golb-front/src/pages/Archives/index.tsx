@@ -1,10 +1,10 @@
 import React from 'react';
-import BlogTimeLine from "../../components/BlogTimeLine";
+import BlogArchives from "../../components/BlogTimeLine";
 
 const Archives = () => {
     return (
         <div>
-            <BlogTimeLine/>
+            <BlogArchives/>
         </div>
     );
 };
