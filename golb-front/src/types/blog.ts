@@ -1,8 +1,7 @@
 
 // 博客列表types
-import React from "react";
-
 interface IBlogList {
+    id: number
     coverImg: string
     title: string
     userName: string

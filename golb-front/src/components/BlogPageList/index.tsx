@@ -3,11 +3,12 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Skeleton from '@mui/material/Skeleton';
-import {Pagination, Stack} from "@mui/material";
+import {Button, Pagination, Stack} from "@mui/material";
 import {useEffect, useState} from "react";
 import {getArticlesList} from "../../services/article";
 import {IBlogList, IBlogRowsList} from "../../types/blog";
 import {dateFormat} from "../../utils/dateUtils";
+import {useNavigate} from "react-router-dom";
 
 
 /**
@@ -17,12 +18,13 @@ import {dateFormat} from "../../utils/dateUtils";
 const handlePageData = (data: any) => {
     const blogRowsList: IBlogRowsList[] = [];
     // 切片
-    let arrLen = 3;  //这里一行数组最多3个
+    let arrLen = 4;  //这里一行数组最多3个
     for (let i=0; i<data.length; i+=arrLen) {
         const blogSlice = data.slice(i,i+arrLen)
         const blogList: IBlogList[] = []
         for (let blogSliceElement of blogSlice) {
             const blog: IBlogList = {
+                id: blogSliceElement.id,
                 coverImg: blogSliceElement.coverImg,
                 title: blogSliceElement.title,
                 userName: "aabb",
@@ -51,38 +53,48 @@ interface BlogCardProps {
 function BlogCard(props: BlogCardProps) {
     const { loading = false, blogList } = props;
 
+    let navigate = useNavigate()
+
+    // 点击博客处理
+    const handleBlogClick = (item: IBlogList) => {
+        console.log(item)
+        navigate('/blog/'+item.id)
+    }
+
     return (
         <Grid container wrap="nowrap" sx={{justifyContent: 'center'}} item spacing={3}>
-            {(loading ? Array.from(new Array(3)) : blogList).map((item, index) => (
-                <Box key={index} sx={{ width: 210, marginRight: 1, marginLeft: 1, my: 5 }}>
-                    {item ? (
-                        <img
-                            style={{ width: 210, height: 140, borderRadius: 3}}
-                            alt={item.title}
-                            src={item.coverImg}
-                        />
-                    ) : (
-                        <Skeleton variant="rectangular" width={210} height={100} />
-                    )}
-                    {item ? (
-                        <Box sx={{ pr: 2 }}>
-                            <Typography gutterBottom variant="body2">
-                                {item.title}
-                            </Typography>
-                            <Typography display="block" variant="caption" color="text.secondary">
-                                {item.channel}
-                            </Typography>
-                            <Typography variant="caption" color="text.secondary">
-                                {`${item.views} 次浏览 • ${dateFormat(item.createTime, 'YYYY年MM月DD日')}`}
-                            </Typography>
-                        </Box>
-                    ) : (
-                        <Box sx={{ pt: 0.5 }}>
-                            <Skeleton />
-                            <Skeleton width="60%" />
-                        </Box>
-                    )}
-                </Box>
+            {(loading ? Array.from(new Array(4)) : blogList).map((item, index) => (
+                <Button key={index} onClick={()=>{handleBlogClick(item)}}>
+                    <Box key={index} sx={{ width: 210, marginRight: 1, marginLeft: 1, my: 5 }}>
+                        {item ? (
+                            <img
+                                style={{ width: 210, height: 140, borderRadius: 3}}
+                                alt={item.title}
+                                src={item.coverImg}
+                            />
+                        ) : (
+                            <Skeleton variant="rectangular" width={210} height={100} />
+                        )}
+                        {item ? (
+                            <Box sx={{ pr: 2 }}>
+                                <Typography gutterBottom variant="body2">
+                                    {item.title}
+                                </Typography>
+                                <Typography display="block" variant="caption" color="text.secondary">
+                                    {item.channel}
+                                </Typography>
+                                <Typography variant="caption" color="text.secondary">
+                                    {`${item.views} 次浏览 • ${dateFormat(item.createTime, 'YYYY年MM月DD日')}`}
+                                </Typography>
+                            </Box>
+                        ) : (
+                            <Box sx={{ pt: 0.5 }}>
+                                <Skeleton />
+                                <Skeleton width="60%" />
+                            </Box>
+                        )}
+                    </Box>
+                </Button>
             ))}
         </Grid>
     );
@@ -99,8 +111,7 @@ export default function BlogPageList() {
 
     useEffect(()=> {
         // 获取文章列表
-        getArticlesList(1, 6, "").then(res => {
-            console.log(res.data)
+        getArticlesList(1, 8, "").then(res => {
             // 总页数
             setTotalPages(res.data.totalPage)
             // 处理博客数据
@@ -113,9 +124,7 @@ export default function BlogPageList() {
     // 分页handle
     const handlePagination = (event: React.ChangeEvent<unknown>, page: number) => {
         // 获取文章列表
-        getArticlesList(page, 6, "").then(res => {
-            console.log("翻页获取文章列表")
-            console.log(res.data)
+        getArticlesList(page, 8, "").then(res => {
             // 总页数
             setTotalPages(res.data.totalPage)
             // 处理博客数据

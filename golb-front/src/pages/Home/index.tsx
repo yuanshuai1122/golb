@@ -1,5 +1,5 @@
 import React from 'react';
-import BlogPageList from "../../components/BlogList";
+import BlogPageList from "../../components/BlogPageList";
 
 const Home = () => {
     return (
