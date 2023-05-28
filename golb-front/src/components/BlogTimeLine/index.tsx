@@ -38,6 +38,22 @@ const BlogTimeLine = (archive :IArchive) => {
 }
 
 /**
+ * 处理归档数据
+ * @param data
+ */
+const handleArchiveData = (data: any[]) => {
+    const archiveLists: IArchive[] = []
+    for (let datum of data) {
+        const archive: IArchive = {
+            title: datum.title,
+            createTime: datum.createTime
+        }
+        archiveLists.push(archive)
+    }
+
+    return archiveLists
+}
+/**
  * 归档组件
  * @constructor
  */
@@ -50,20 +66,26 @@ export default function BlogArchives() {
 
         useEffect(()=> {
         // 获取归档列表
-        getArchivesList(1, 3).then(res => {
-            console.log(res)
+        getArchivesList(1, 8).then(res => {
             setArchivePages(res.data.totalPage)
-            const archiveLists: IArchive[] = []
-            for (let datum of res.data.list) {
-                const archive: IArchive = {
-                    title: datum.title,
-                    createTime: datum.createTime
-                }
-                archiveLists.push(archive)
-            }
+            const archiveLists: IArchive[] = handleArchiveData(res.data.list);
             setArchiveData(archiveLists)
         })
     }, [])
+
+    /**
+     * 处理分页数据
+     * @param event 分页事件
+     * @param page 页数
+     */
+    const handlePagination = (event: React.ChangeEvent<unknown>, page: number) => {
+        // 获取归档列表
+        getArchivesList(page, 8).then(res => {
+            setArchivePages(res.data.totalPage)
+            const archiveLists: IArchive[] = handleArchiveData(res.data.list);
+            setArchiveData(archiveLists)
+        })
+    }
 
     return (
         <>
@@ -79,7 +101,10 @@ export default function BlogArchives() {
                 })
             }
             <Stack sx={{alignItems: 'center'}} spacing={2}>
-                <Pagination count={archivePages}/>
+                <Pagination
+                    count={archivePages}
+                    onChange={handlePagination}
+                />
             </Stack>
         </>
     );
