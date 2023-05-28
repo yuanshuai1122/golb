@@ -24,3 +24,19 @@ func (con ArticleController) GetArticlesListPage(c *gin.Context) {
 	}
 	utils.SuccessData(c, result)
 }
+
+// GetArticleDetail 根据文章id获取文章详情
+func (con ArticleController) GetArticleDetail(c *gin.Context) {
+	// 获取传入的id
+	id, err := strconv.ParseInt(c.Query("id"), 10, 64)
+	if err != nil {
+		utils.MissId(c)
+	}
+
+	result := services.ArticleService{}.GetArticleDetail(id)
+	if result == nil {
+		utils.Failed(c, "文章不存在")
+	}
+	utils.SuccessData(c, result)
+
+}

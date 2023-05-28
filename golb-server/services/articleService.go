@@ -13,3 +13,13 @@ func (ArticleService) GetArticlesList(pageNum int64, pageSize int64, keywords st
 	}
 	return result
 }
+
+// GetArticleDetail 根据id获取文章详情
+func (ArticleService) GetArticleDetail(id int64) interface{} {
+	// 根据id查询文章
+	result := models.Articles{}.GetArticleInfoById(id)
+	if result == nil {
+		return nil
+	}
+	return result
+}
