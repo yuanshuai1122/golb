@@ -28,7 +28,7 @@ const handlePageData = (data: any) => {
                 coverImg: blogSliceElement.coverImg,
                 title: blogSliceElement.title,
                 userName: "aabb",
-                views: 100,
+                views: blogSliceElement.views,
                 createTime: blogSliceElement.createTime
             }
             blogList.push(blog)

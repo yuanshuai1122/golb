@@ -12,3 +12,11 @@ export const getArticlesList = (pageNum: number, pageSize: number, keywords: str
     pageSize,
     keywords
 });
+
+/**
+ * 根据id获取文章详情
+ * @param id 文章id
+ */
+export const getArticlesDetail = (id: number): Promise<any> => request.get(`${BASE_URL}/articles/detail`, {
+    id
+});
