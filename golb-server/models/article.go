@@ -15,6 +15,8 @@ type Articles struct {
 	Title string `gorm:"column:title" json:"title"`
 	// 文章封面图
 	CoverImg string `gorm:"column:cover_img" json:"coverImg"`
+	// 摘要
+	Abstract string `gorm:"column:abstract" json:"abstract"`
 	// 文章详细内容
 	Content string `gorm:"column:content" json:"content"`
 	// 浏览量
@@ -39,6 +41,8 @@ type ArticleItem struct {
 	Title string `gorm:"column:title" json:"title"`
 	// 文章封面图
 	CoverImg string `gorm:"column:cover_img" json:"coverImg"`
+	// 摘要
+	Abstract string `gorm:"column:abstract" json:"abstract"`
 	// 浏览量
 	Views int `gorm:"column:views" json:"views"`
 	// 创建时间
@@ -77,7 +81,7 @@ func (Articles) GetArticlesList(pageNum int64, pageSize int64, keywords string) 
 	var count int64
 	var articleList []ArticleItem
 	// 查总数
-	if err := utils.DB.Table("articles").Select("id").Where("(title LIKE ? or content LIKE ?) and status = ?", keywords+"%", keywords+"%", "normal").Scan(&articleList).Count(&count).Error; err != nil {
+	if err := utils.DB.Table("articles").Select("id").Where("(title LIKE ? or abstract LIKE ?) and status = ?", keywords+"%", keywords+"%", "normal").Scan(&articleList).Count(&count).Error; err != nil {
 		return nil
 	}
 	// 分页查询
@@ -121,7 +125,7 @@ func (Articles) GetArchivesList(pageNum int64, pageSize int64) interface{} {
 // GetArticleInfoById 根据id查询文章详情
 func (Articles) GetArticleInfoById(id int64) interface{} {
 	var articleDetail ArticleDetail
-	if err := utils.DB.Table("articles").Select("articles.title, articles.cover_img, articles.abstract, articles.create_time, articles.update_time, articles_info.content, articles_info.views").Where("articles.id = ?", id).Joins("inner join articles_info on articles.id = articles_info.article_id").Scan(&articleDetail).Error; err != nil {
+	if err := utils.DB.Table("articles").Where("articles.id = ?", id).Scan(&articleDetail).Error; err != nil {
 		return nil
 	}
 

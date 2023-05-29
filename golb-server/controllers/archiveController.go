@@ -15,6 +15,9 @@ func (con ArchiveController) GetArchivesListPage(c *gin.Context) {
 	pageNum, _ := strconv.ParseInt(c.Query("pageNum"), 10, 64)
 	// 页大小
 	pageSize, _ := strconv.ParseInt(c.Query("pageSize"), 10, 64)
+	if pageSize == 0 || pageNum == 0 {
+		utils.Failed(c, "非法入参")
+	}
 	// 查询归档列表
 	result := services.ArchiveService{}.GetArchivesList(pageNum, pageSize)
 	if result == nil {

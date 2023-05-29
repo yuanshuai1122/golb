@@ -17,6 +17,11 @@ func (con ArticleController) GetArticlesListPage(c *gin.Context) {
 	pageSize, _ := strconv.ParseInt(c.Query("pageSize"), 10, 64)
 	// 关键字
 	keywords := c.Query("keywords")
+	// 入参判断
+	if pageNum == 0 || pageSize == 0 {
+		utils.Failed(c, "非法入参")
+	}
+
 	// 查询文章列表
 	result := services.ArticleService{}.GetArticlesList(pageNum, pageSize, keywords)
 	if result == nil {
