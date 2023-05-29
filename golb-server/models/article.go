@@ -15,8 +15,10 @@ type Articles struct {
 	Title string `gorm:"column:title" json:"title"`
 	// 文章封面图
 	CoverImg string `gorm:"column:cover_img" json:"coverImg"`
-	// 文章摘要
-	Abstract string `gorm:"column:abstract" json:"abstract"`
+	// 文章详细内容
+	Content string `gorm:"column:content" json:"content"`
+	// 浏览量
+	Views int `gorm:"column:views" json:"views"`
 	// 状态 normal：正常 deleted：已删除
 	Status string `gorm:"column:status" json:"status"`
 	// 创建时间
@@ -25,20 +27,22 @@ type Articles struct {
 	UpdateTime time.Time `gorm:"column:update_time" json:"updateTime"`
 }
 
-type ArticlesInfo struct {
-	// 主键id
-	Id int `gorm:"column:id" json:"id"`
-	// 文章id
-	ArticleId int `gorm:"column:article_id" json:"articleId"`
-	// 文章内容
-	Content string `gorm:"column:content" json:"content"`
-	// 浏览次数
-	Views int64 `gorm:"column:views" json:"views"`
-}
-
 // TableName 绑定表名
 func (Articles) TableName() string {
 	return "articles"
+}
+
+type ArticleItem struct {
+	// 主键id
+	Id int `gorm:"column:id" json:"id"`
+	// 文章标题
+	Title string `gorm:"column:title" json:"title"`
+	// 文章封面图
+	CoverImg string `gorm:"column:cover_img" json:"coverImg"`
+	// 浏览量
+	Views int `gorm:"column:views" json:"views"`
+	// 创建时间
+	CreateTime time.Time `gorm:"column:create_time" json:"createTime"`
 }
 
 // Archives 归档
@@ -71,13 +75,13 @@ type ArticleDetail struct {
 func (Articles) GetArticlesList(pageNum int64, pageSize int64, keywords string) interface{} {
 	offset := (pageNum - 1) * pageSize
 	var count int64
-	var articleList []Articles
+	var articleList []ArticleItem
 	// 查总数
-	if err := utils.DB.Where("(title LIKE ? or abstract LIKE ?) and status = ?", keywords+"%", keywords+"%", "normal").Find(&articleList).Count(&count).Error; err != nil {
+	if err := utils.DB.Table("articles").Select("id").Where("(title LIKE ? or content LIKE ?) and status = ?", keywords+"%", keywords+"%", "normal").Scan(&articleList).Count(&count).Error; err != nil {
 		return nil
 	}
 	// 分页查询
-	if err := utils.DB.Offset(int(offset)).Limit(int(pageSize)).Where("(title LIKE ? or abstract LIKE ?) and status = ?", keywords+"%", keywords+"%", "normal").Find(&articleList).Error; err != nil {
+	if err := utils.DB.Table("articles").Offset(int(offset)).Limit(int(pageSize)).Where("(title LIKE ? or abstract LIKE ?) and status = ?", keywords+"%", keywords+"%", "normal").Scan(&articleList).Error; err != nil {
 		return nil
 	} else {
 		totalPage := utils.ReturnTotalPage(count, pageSize)
