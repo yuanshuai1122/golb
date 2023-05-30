@@ -12,7 +12,7 @@ const App = () => {
         <div>
             <React.Fragment>
                 <CssBaseline />
-                    <Container maxWidth="lg">
+                    <Container maxWidth="md">
                         <NavTabs/>
                         <Routes>
                             <Route path="/" element={<Home />}></Route>
