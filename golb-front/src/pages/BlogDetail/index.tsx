@@ -4,6 +4,8 @@ import {getArticlesDetail} from "../../services/article";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import {BlogInfo} from "../../types/blog";
+import ReactMarkdown from "react-markdown";
+import gfm from 'remark-gfm'
 
 const BlogDetail = () => {
 
@@ -29,7 +31,10 @@ const BlogDetail = () => {
                 </Typography>
                 <hr/>
                 <Typography variant="subtitle1" gutterBottom>
-                    {blogInfo?.content}
+                    <ReactMarkdown
+                        remarkPlugins={[gfm]}>
+                        {blogInfo?.content === undefined ? "" : blogInfo.content}
+                    </ReactMarkdown>
                 </Typography>
             </Box>
         </>
