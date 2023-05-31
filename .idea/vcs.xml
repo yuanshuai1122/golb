@@ -4,5 +4,6 @@
     <mapping directory="" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/blog-backend" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/blog-front-end" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/golb-admin" vcs="Git" />
   </component>
 </project>
