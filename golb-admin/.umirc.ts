@@ -20,15 +20,17 @@ export default defineConfig({
       component: './Home',
     },
     {
-      name: '权限演示',
-      path: '/access',
-      component: './Access',
+      name: '文章管理',
+      path: '/articles',
+      routes: [
+        {
+          name: '文章发布',
+          path: '/articles/publish',
+          component: './Articles/Publish',
+        },
+      ],
     },
-    {
-      name: ' CRUD 示例',
-      path: '/table',
-      component: './Table',
-    },
+
   ],
   npmClient: 'pnpm',
 });

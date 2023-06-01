@@ -13,6 +13,7 @@
   "dependencies": {
     "@ant-design/icons": "^5.0.1",
     "@ant-design/pro-components": "^2.4.4",
+    "@uiw/react-md-editor": "^3.23.3",
     "@umijs/max": "^4.0.69",
     "antd": "^5.4.0"
   },
