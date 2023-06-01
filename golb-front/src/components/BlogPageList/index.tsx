@@ -9,95 +9,29 @@ import {getArticlesList} from "../../services/article";
 import {IBlogList, IBlogRowsList} from "../../types/blog";
 import {dateFormat} from "../../utils/dateUtils";
 import {useNavigate} from "react-router-dom";
+import BlogCard from "../BlogCardV2";
 
 
 /**
  * 处理博客页数据
  * @param data 数据源
  */
-const handlePageData = (data: any) => {
-    const blogRowsList: IBlogRowsList[] = [];
-    // 切片
-    let arrLen = 4;  //这里一行数组最多3个
-    for (let i=0; i<data.length; i+=arrLen) {
-        const blogSlice = data.slice(i,i+arrLen)
-        const blogList: IBlogList[] = []
-        for (let blogSliceElement of blogSlice) {
-            const blog: IBlogList = {
-                id: blogSliceElement.id,
-                coverImg: blogSliceElement.coverImg,
-                title: blogSliceElement.title,
-                userName: "aabb",
-                views: blogSliceElement.views,
-                createTime: blogSliceElement.createTime
-            }
-            blogList.push(blog)
+const handlePageData = (data: any[]) => {
+    const blogCardList: IBlogList[] = []
+    data.map((item, index) => {
+        const blog: IBlogList = {
+            id: item.id,
+            coverImg: item.coverImg,
+            title: item.title,
+            abstract: item.abstract,
+            userName: "aabb",
+            views: item.views,
+            createTime: item.createTime,
         }
-        blogRowsList.push({
-            blogList: blogList
-        });
-    }
+        blogCardList.push(blog)
+    })
 
-    return blogRowsList;
-}
-
-/**
- * 博客卡片组件
- * @param props 参数
- * @constructor
- */
-interface BlogCardProps {
-    loading?: boolean;
-    blogList: IBlogList[]
-}
-function BlogCard(props: BlogCardProps) {
-    const { loading = false, blogList } = props;
-
-    let navigate = useNavigate()
-
-    // 点击博客处理
-    const handleBlogClick = (item: IBlogList) => {
-        console.log(item)
-        navigate('/blog/'+item.id)
-    }
-
-    return (
-        <Grid container wrap="nowrap" sx={{justifyContent: 'center'}} item spacing={3}>
-            {(loading ? Array.from(new Array(4)) : blogList).map((item, index) => (
-                <Button key={index} onClick={()=>{handleBlogClick(item)}}>
-                    <Box key={index} sx={{ width: 210, marginRight: 1, marginLeft: 1, my: 5 }}>
-                        {item ? (
-                            <img
-                                style={{ width: 210, height: 140, borderRadius: 3}}
-                                alt={item.title}
-                                src={item.coverImg}
-                            />
-                        ) : (
-                            <Skeleton variant="rectangular" width={210} height={100} />
-                        )}
-                        {item ? (
-                            <Box sx={{ pr: 2 }}>
-                                <Typography gutterBottom variant="body2">
-                                    {item.title}
-                                </Typography>
-                                <Typography display="block" variant="caption" color="text.secondary">
-                                    {item.channel}
-                                </Typography>
-                                <Typography variant="caption" color="text.secondary">
-                                    {`${item.views} 次浏览 • ${dateFormat(item.createTime, 'YYYY年MM月DD日')}`}
-                                </Typography>
-                            </Box>
-                        ) : (
-                            <Box sx={{ pt: 0.5 }}>
-                                <Skeleton />
-                                <Skeleton width="60%" />
-                            </Box>
-                        )}
-                    </Box>
-                </Button>
-            ))}
-        </Grid>
-    );
+    return blogCardList
 }
 
 /**
@@ -107,6 +41,7 @@ function BlogCard(props: BlogCardProps) {
 export default function BlogPageList() {
 
     const [blogRowsList, setBlogRowsList] = useState<IBlogRowsList[]>([]);
+    const [blogList, setBlogList] = useState<IBlogList[]>([]);
     const [totalPages, setTotalPages] = useState<number>(0);
 
     useEffect(()=> {
@@ -115,8 +50,9 @@ export default function BlogPageList() {
             // 总页数
             setTotalPages(res.data.totalPage)
             // 处理博客数据
-            const blogRows: IBlogRowsList[] = handlePageData(res.data.list)
-            setBlogRowsList(blogRows)
+            // 处理博客数据
+            const blogs: IBlogList[] = handlePageData(res.data.list);
+            setBlogList(blogs)
 
         })
     }, [])
@@ -128,9 +64,8 @@ export default function BlogPageList() {
             // 总页数
             setTotalPages(res.data.totalPage)
             // 处理博客数据
-            const blogRows: IBlogRowsList[] = handlePageData(res.data.list)
-            setBlogRowsList(blogRows)
-
+            const blogs: IBlogList[] = handlePageData(res.data.list);
+            setBlogList(blogs)
         })
     }
 
@@ -138,8 +73,21 @@ export default function BlogPageList() {
         <>
             <Box sx={{ overflow: 'hidden'}}>
                 {
-                    blogRowsList.map((item, index) => {
-                        return <BlogCard key={index} blogList={item.blogList} />
+                    blogList.map((item, index) => {
+                        return (
+                            <>
+                                <BlogCard
+                                    key={index}
+                                    id={item.id}
+                                    title={item.title}
+                                    abstract={item.abstract}
+                                    userName={item.userName}
+                                    views={item.views}
+                                    coverImg={item.coverImg}
+                                    createTime={item.createTime}
+                                />
+                            </>
+                        )
                     })
                 }
             </Box>

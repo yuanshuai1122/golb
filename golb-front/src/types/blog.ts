@@ -3,6 +3,7 @@
 interface IBlogList {
     id: number
     coverImg: string
+    abstract: string
     title: string
     userName: string
     views: number
