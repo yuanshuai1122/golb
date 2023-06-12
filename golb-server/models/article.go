@@ -95,7 +95,7 @@ func (Articles) GetArticlesList(pageNum int64, pageSize int64, keywords string) 
 		return nil
 	}
 	// 分页查询
-	if err := utils.DB.Table("articles").Offset(int(offset)).Limit(int(pageSize)).Where("(title LIKE ? or abstract LIKE ?) and status = ?", keywords+"%", keywords+"%", "normal").Scan(&articleList).Error; err != nil {
+	if err := utils.DB.Table("articles").Offset(int(offset)).Limit(int(pageSize)).Where("(title LIKE ? or abstract LIKE ?) and status = ?", keywords+"%", keywords+"%", "normal").Order("id desc").Scan(&articleList).Error; err != nil {
 		return nil
 	} else {
 		totalPage := utils.ReturnTotalPage(count, pageSize)
