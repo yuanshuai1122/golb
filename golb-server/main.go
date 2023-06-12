@@ -18,6 +18,8 @@ func main() {
 	routers.ArticleRoutersInit(r)
 	// 归档相关
 	routers.ArchiveRoutersInit(r)
+	// 后台相关
+	routers.AdminRouterInit(r)
 
 	err := r.Run(":8088")
 	if err != nil {

@@ -15,9 +15,4 @@ func ArticleRoutersInit(r *gin.Engine) {
 		articleRouters.GET("/detail", controllers.ArticleController{}.GetArticleDetail)
 	}
 
-	// 后台管理相关接口
-	adminRouters := r.Group("/admin")
-	{
-		adminRouters.POST("/articles/create", controllers.ArticleController{}.PostArticle)
-	}
 }
