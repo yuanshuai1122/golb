@@ -23,3 +23,12 @@ func (ArticleService) GetArticleDetail(id int64) interface{} {
 	}
 	return result
 }
+
+func (ArticleService) PostArticle(articleInfo models.ArticleInfo) interface{} {
+	// 新增文章
+	result := models.Articles{}.PostArticle(articleInfo)
+	if result == nil {
+		return nil
+	}
+	return result
+}

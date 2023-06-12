@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"github.com/gin-gonic/gin"
+	"golb/golb-server/models"
 	"golb/golb-server/services"
 	"golb/golb-server/utils"
 	"strconv"
@@ -44,4 +45,18 @@ func (con ArticleController) GetArticleDetail(c *gin.Context) {
 	}
 	utils.SuccessData(c, result)
 
+}
+
+// PostArticle 创建文章
+func (con ArticleController) PostArticle(c *gin.Context) {
+	articleInfo := models.ArticleInfo{}
+	err := c.ShouldBindJSON(&articleInfo)
+	if err != nil {
+		utils.Failed(c, "参数格式不正确")
+	}
+	result := services.ArticleService{}.PostArticle(articleInfo)
+	if result == nil {
+		utils.Failed(c, "新增文章失败")
+	}
+	utils.Success(c)
 }

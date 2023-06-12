@@ -57,7 +57,7 @@ type Archives struct {
 	CreateTime time.Time `gorm:"column:create_time" json:"createTime"`
 }
 
-// ArticleInfo 文章详情
+// ArticleDetail 文章详情
 type ArticleDetail struct {
 	// 文章标题
 	Title string `gorm:"column:title" json:"title"`
@@ -73,6 +73,16 @@ type ArticleDetail struct {
 	CreateTime time.Time `gorm:"column:create_time" json:"createTime"`
 	// 修改时间
 	UpdateTime time.Time `gorm:"column:update_time" json:"updateTime"`
+}
+
+// ArticleInfo 插入文章信息
+type ArticleInfo struct {
+	// 文章标题
+	Title string `gorm:"column:title" json:"title"`
+	// 文章封面图
+	CoverImg string `gorm:"column:cover_img" json:"coverImg"`
+	// 文章内容
+	Content string `gorm:"column:content" json:"content"`
 }
 
 // GetArticlesList 获取文章列表（分页）
@@ -131,4 +141,25 @@ func (Articles) GetArticleInfoById(id int64) interface{} {
 
 	return articleDetail
 
+}
+
+// PostArticle 插入文章信息
+func (Articles) PostArticle(articleInfo ArticleInfo) interface{} {
+	article := Articles{
+		UserId:     1,
+		Title:      articleInfo.Title,
+		CoverImg:   articleInfo.CoverImg,
+		Abstract:   "",
+		Content:    articleInfo.Content,
+		Views:      0,
+		Status:     "normal",
+		CreateTime: time.Now(),
+		UpdateTime: time.Now(),
+	}
+	result := utils.DB.Create(&article)
+	if result.Error != nil {
+		return nil
+	}
+	// 返回影响行数
+	return result.RowsAffected
 }
