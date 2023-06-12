@@ -2,9 +2,12 @@ import React, {useState} from 'react';
 import MDEditor from '@uiw/react-md-editor';
 import {Button, Form, Input, Modal, Space} from "antd";
 import {SendOutlined} from "@ant-design/icons";
+import {postArticle} from "@/services/article";
+import {IPostArticle} from "@/types/article";
 
 const Publish: React.FC = () => {
 
+    const [title, setTitle] = useState("");
     const [value, setValue] = useState("**Hello world!!!**");
     const [open, setOpen] = useState(false);
     const [confirmLoading, setConfirmLoading] = useState(false);
@@ -15,10 +18,16 @@ const Publish: React.FC = () => {
 
     const handleOk = () => {
         setConfirmLoading(true);
-        setTimeout(() => {
+        const data: IPostArticle = {
+            title: title,
+            coverImg: "http://images.pexels.com/photos/2286895/pexels-photo-2286895.jpeg",
+            content: value
+        }
+        postArticle(data).then(r => {
+            console.log(r)
             setOpen(false);
             setConfirmLoading(false);
-        }, 2000);
+        })
     };
 
     const handleCancel = () => {
@@ -34,13 +43,13 @@ const Publish: React.FC = () => {
 
     const onFinish = (values: any) => {
         showModal()
-        console.log('Success:', values);
+        console.log('Success1111:', values);
         console.log(value)
     };
 
-    const onFinishModal = (values: any) => {
-        console.log('Success:', values);
-        console.log(value)
+    const handleTitleChange = (value: any) => {
+        console.log(value.target.value)
+        setTitle(value.target.value)
     };
 
     // https://github.com/uiwjs/react-md-editor
@@ -56,14 +65,13 @@ const Publish: React.FC = () => {
             >
                 <Form
                     name="onPublish"
-                    onFinish={onFinishModal}
                 >
                     <Form.Item
                         label="文章标题"
                         name="title"
                         rules={[{ required: true, message: '请输入文章标题' }]}
                     >
-                        <Input />
+                        <Input onChange={handleTitleChange}/>
                     </Form.Item>
                 </Form>
             </Modal>
