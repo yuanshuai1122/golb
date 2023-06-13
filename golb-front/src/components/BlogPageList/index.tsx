@@ -54,6 +54,8 @@ export default function BlogPageList() {
             const blogs: IBlogList[] = handlePageData(res.data.list);
             setBlogList(blogs)
 
+        }).catch(e => {
+            console.log(e)
         })
     }, [])
 
@@ -66,6 +68,8 @@ export default function BlogPageList() {
             // 处理博客数据
             const blogs: IBlogList[] = handlePageData(res.data.list);
             setBlogList(blogs)
+        }).catch(e => {
+            console.log(e)
         })
     }
 
