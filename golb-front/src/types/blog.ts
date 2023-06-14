@@ -7,6 +7,7 @@ interface IBlogList {
     title: string
     userName: string
     views: number
+    categoryName: string
     createTime: string
 }
 

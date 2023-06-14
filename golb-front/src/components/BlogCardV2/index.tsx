@@ -8,6 +8,7 @@ import {IBlogList} from "../../types/blog";
 import {Button} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import Link from '@mui/material/Link';
+import {dateFormat} from "../../utils/dateUtils";
 
 const Img = styled('img')({
     margin: 'auto',
@@ -18,7 +19,7 @@ const Img = styled('img')({
 
 export default function BlogCard(props: IBlogList) {
 
-    const {id,  title, views, userName,  coverImg, createTime, abstract} = props
+    const {id,  title, views, userName,  coverImg, createTime, abstract, categoryName} = props
 
     return (
         <Paper
@@ -50,7 +51,7 @@ export default function BlogCard(props: IBlogList) {
                         </Grid>
                         <Grid item>
                             <Typography sx={{ cursor: 'pointer' }} variant="body2">
-                                {createTime} -- {views}
+                                {dateFormat(createTime, 'YYYY-MM-DD HH:mm')} | 分类：{categoryName}｜浏览量：{views}
                             </Typography>
                         </Grid>
                     </Grid>

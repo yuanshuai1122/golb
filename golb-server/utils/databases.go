@@ -22,7 +22,7 @@ func InitDB() {
 			LogLevel:      logger.Info, // 级别
 			Colorful:      true,
 		})
-	dsn := `root:hh%Gy&rTYM@oepc6@tcp(bj-cynosdbmysql-grp-o9u7ldum.sql.tencentcdb.com:21457)/golb_db?charset=utf8mb4&parseTime=True&loc=Local`
+	dsn := `root:hh%Gy&rTYM@oepc6@tcp(bj-cynosdbmysql-grp-o9u7ldum.sql.tencentcdb.com:21457)/golb_local?charset=utf8mb4&parseTime=True&loc=Local`
 	DB, err = gorm.Open(mysql.Open(dsn), &gorm.Config{Logger: newLogger})
 	if err != nil {
 		fmt.Println(err)

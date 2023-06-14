@@ -19,6 +19,8 @@ type Articles struct {
 	Abstract string `gorm:"column:abstract" json:"abstract"`
 	// 文章详细内容
 	Content string `gorm:"column:content" json:"content"`
+	// 分类id
+	CategoryId int `gorm:"column:category_id" json:"categoryId"`
 	// 浏览量
 	Views int `gorm:"column:views" json:"views"`
 	// 状态 normal：正常 deleted：已删除
@@ -45,6 +47,8 @@ type ArticleItem struct {
 	Abstract string `gorm:"column:abstract" json:"abstract"`
 	// 浏览量
 	Views int `gorm:"column:views" json:"views"`
+	// 分类
+	CategoryName string `gorm:"column:category_name" json:"categoryName"`
 	// 创建时间
 	CreateTime time.Time `gorm:"column:create_time" json:"createTime"`
 }
@@ -89,19 +93,19 @@ type ArticleInfo struct {
 func (Articles) GetArticlesList(pageNum int64, pageSize int64, keywords string) interface{} {
 	offset := (pageNum - 1) * pageSize
 	var count int64
-	var articleList []ArticleItem
+	var articleItem []ArticleItem
 	// 查总数
-	if err := utils.DB.Table("articles").Select("id").Where("(title LIKE ? or abstract LIKE ?) and status = ?", keywords+"%", keywords+"%", "normal").Scan(&articleList).Count(&count).Error; err != nil {
+	if err := utils.DB.Table("articles").Select("id").Where("(title LIKE ? or abstract LIKE ?) and status = ?", keywords+"%", keywords+"%", "normal").Scan(&articleItem).Count(&count).Error; err != nil {
 		return nil
 	}
 	// 分页查询
-	if err := utils.DB.Table("articles").Offset(int(offset)).Limit(int(pageSize)).Where("(title LIKE ? or abstract LIKE ?) and status = ?", keywords+"%", keywords+"%", "normal").Order("id desc").Scan(&articleList).Error; err != nil {
+	if err := utils.DB.Table("articles").Select("articles.id, articles.title, articles.cover_img, articles.abstract, articles.views, articles.create_time, category.category_name").Joins("left join category on category.id = articles.category_id").Offset(int(offset)).Limit(int(pageSize)).Where("(articles.title LIKE ? or articles.abstract LIKE ?) and articles.status = ?", keywords+"%", keywords+"%", "normal").Order("articles.id desc").Scan(&articleItem).Error; err != nil {
 		return nil
 	} else {
 		totalPage := utils.ReturnTotalPage(count, pageSize)
 		return map[string]interface{}{
 			"pageNum":   pageNum,
-			"list":      articleList,
+			"list":      articleItem,
 			"pageSize":  pageSize,
 			"total":     count,
 			"totalPage": totalPage,

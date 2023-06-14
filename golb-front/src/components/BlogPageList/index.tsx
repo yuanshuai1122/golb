@@ -26,6 +26,7 @@ const handlePageData = (data: any[]) => {
             abstract: item.abstract,
             userName: "aabb",
             views: item.views,
+            categoryName: item.categoryName,
             createTime: item.createTime,
         }
         blogCardList.push(blog)
@@ -88,6 +89,7 @@ export default function BlogPageList() {
                                     userName={item.userName}
                                     views={item.views}
                                     coverImg={item.coverImg}
+                                    categoryName={item.categoryName}
                                     createTime={item.createTime}
                                 />
                             </>
