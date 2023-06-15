@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useEffect, useState} from 'react';
 import Timeline from '@mui/lab/Timeline';
 import TimelineItem from '@mui/lab/TimelineItem';
 import TimelineSeparator from '@mui/lab/TimelineSeparator';
@@ -7,7 +8,6 @@ import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineDot from '@mui/lab/TimelineDot';
 import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
 import {Pagination, Stack} from "@mui/material";
-import {useEffect, useState} from "react";
 import {getArchivesList} from "../../services/archive";
 import {IArchive} from "../../types/archive";
 import {dateFormat} from "../../utils/dateUtils";

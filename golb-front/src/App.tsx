@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Archives from "./pages/Archives";
 import BlogDetail from "./pages/BlogDetail";
+import Category from "./pages/Category";
 
 const App = () => {
     return (
@@ -16,6 +17,7 @@ const App = () => {
                         <NavTabs/>
                         <Routes>
                             <Route path="/" element={<Home />}></Route>
+                            <Route path="/category" element={<Category />}></Route>
                             <Route path="/archives" element={<Archives />}></Route>
                             <Route path="/about" caseSensitive element={<About/>}></Route>
                             <Route path='/blog/:id' element={<BlogDetail/>}/>

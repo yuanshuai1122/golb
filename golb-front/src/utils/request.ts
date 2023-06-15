@@ -5,8 +5,8 @@
  */
 
 
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { CONTENT_TYPE } from '../constants';
+import axios, {AxiosRequestConfig, AxiosResponse} from 'axios';
+import {CONTENT_TYPE} from '../constants';
 
 
 const axiosCreate = axios.create();

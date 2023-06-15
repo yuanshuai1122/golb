@@ -1,15 +1,10 @@
 import * as React from 'react';
-import Grid from '@mui/material/Grid';
+import {useEffect, useState} from 'react';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Skeleton from '@mui/material/Skeleton';
-import {Button, Pagination, Stack} from "@mui/material";
-import {useEffect, useState} from "react";
+import {Pagination, Stack} from "@mui/material";
 import {getArticlesList} from "../../services/article";
 import {IBlogList, IBlogRowsList} from "../../types/blog";
-import {dateFormat} from "../../utils/dateUtils";
-import {useNavigate} from "react-router-dom";
-import BlogCard from "../BlogCardV2";
+import BlogCard from "../BlogCard";
 
 
 /**

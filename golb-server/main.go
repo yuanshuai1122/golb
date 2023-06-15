@@ -20,6 +20,8 @@ func main() {
 	routers.ArchiveRoutersInit(r)
 	// 后台相关
 	routers.AdminRouterInit(r)
+	// 分类相关
+	routers.CategoryRoutersInit(r)
 
 	err := r.Run(":8088")
 	if err != nil {
