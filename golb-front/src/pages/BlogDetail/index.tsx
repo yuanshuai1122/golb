@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import {BlogInfo} from "../../types/blog";
 import ReactMarkdown from "react-markdown";
 import gfm from 'remark-gfm'
+import OmsViewMarkdown from "../../components/OmsViewMarkdown";
 
 const BlogDetail = () => {
 
@@ -31,10 +32,11 @@ const BlogDetail = () => {
                 </Typography>
                 <hr/>
                 <Typography variant="subtitle1" gutterBottom>
-                    <ReactMarkdown
-                        remarkPlugins={[gfm]}>
-                        {blogInfo?.content === undefined ? "" : blogInfo.content}
-                    </ReactMarkdown>
+                    {/*<ReactMarkdown*/}
+                    {/*    remarkPlugins={[gfm]}>*/}
+                    {/*    {blogInfo?.content === undefined ? "" : blogInfo.content}*/}
+                    {/*</ReactMarkdown>*/}
+                    <OmsViewMarkdown textContent={blogInfo?.content === undefined ? "" : blogInfo.content}/>
                 </Typography>
             </Box>
         </>
