@@ -7,6 +7,7 @@ import About from "./pages/About";
 import Archives from "./pages/Archives";
 import BlogDetail from "./pages/BlogDetail";
 import Category from "./pages/Category";
+import Footer from "./components/Footer";
 
 const App = () => {
     return (
@@ -22,6 +23,7 @@ const App = () => {
                             <Route path="/about" caseSensitive element={<About/>}></Route>
                             <Route path='/blog/:id' element={<BlogDetail/>}/>
                         </Routes>
+                        <Footer/>
                     </Container>
             </React.Fragment>
         </div>
