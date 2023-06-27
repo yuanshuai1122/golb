@@ -36,7 +36,6 @@ const handlePageData = (data: any[]) => {
  */
 export default function BlogPageList() {
 
-    const [blogRowsList, setBlogRowsList] = useState<IBlogRowsList[]>([]);
     const [blogList, setBlogList] = useState<IBlogList[]>([]);
     const [totalPages, setTotalPages] = useState<number>(0);
 

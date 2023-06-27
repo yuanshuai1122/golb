@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import BlogPageList from "../../components/BlogPageList";
 import Typography from "@mui/material/Typography";
+import request from "../../utils/request";
 
 const Home = () => {
+
     return (
         <div>
             <div style={{textAlign: "center", marginTop: 40, marginBottom: 30}}>
