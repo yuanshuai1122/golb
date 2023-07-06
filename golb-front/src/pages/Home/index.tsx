@@ -1,7 +1,6 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import BlogPageList from "../../components/BlogPageList";
 import Typography from "@mui/material/Typography";
-import request from "../../utils/request";
 
 const Home = () => {
 

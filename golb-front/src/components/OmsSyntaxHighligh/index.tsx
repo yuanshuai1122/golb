@@ -1,7 +1,7 @@
-import React, { ReactNode } from 'react';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { vscDarkPlus, materialLight, darcula } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { useSnackbar } from 'notistack';
+import React, {ReactNode} from 'react';
+import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
+import {darcula, materialLight, vscDarkPlus} from 'react-syntax-highlighter/dist/esm/styles/prism';
+import {useSnackbar} from 'notistack';
 import IconButton from '@material-ui/core/IconButton';
 import FileCopyTwoToneIcon from '@mui/icons-material/FileCopyTwoTone';
 import Tooltip from '@material-ui/core/Tooltip';

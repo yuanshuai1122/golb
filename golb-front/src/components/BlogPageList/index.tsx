@@ -3,7 +3,7 @@ import {useEffect, useState} from 'react';
 import Box from '@mui/material/Box';
 import {Pagination, Stack} from "@mui/material";
 import {getArticlesList} from "../../services/article";
-import {IBlogList, IBlogRowsList} from "../../types/blog";
+import {IBlogList} from "../../types/blog";
 import BlogCard from "../BlogCard";
 
 

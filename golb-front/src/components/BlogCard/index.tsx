@@ -7,8 +7,6 @@ import ButtonBase from '@mui/material/ButtonBase';
 import {IBlogList} from "../../types/blog";
 import Link from '@mui/material/Link';
 import {dateFormat} from "../../utils/dateUtils";
-import {useEffect} from "react";
-import request from "../../utils/request";
 
 const Img = styled('img')({
     margin: 'auto',

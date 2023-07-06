@@ -18,13 +18,19 @@ func (con ArticleController) GetArticlesListPage(c *gin.Context) {
 	pageSize, _ := strconv.ParseInt(c.Query("pageSize"), 10, 64)
 	// 关键字
 	keywords := c.Query("keywords")
+	// 分类id
+	var categoryId int64 = 0
+	categoryIdStr := c.Query("categoryId")
+	if len(categoryIdStr) != 0 {
+		categoryId, _ = strconv.ParseInt(categoryIdStr, 10, 64)
+	}
 	// 入参判断
 	if pageNum == 0 || pageSize == 0 {
 		utils.Failed(c, "非法入参")
 	}
 
 	// 查询文章列表
-	result := services.ArticleService{}.GetArticlesList(pageNum, pageSize, keywords)
+	result := services.ArticleService{}.GetArticlesList(pageNum, pageSize, keywords, categoryId)
 	if result == nil {
 		utils.SearchPageFaild(c)
 	}

@@ -1,18 +1,16 @@
 import React, {useEffect} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import FolderIcon from '@material-ui/icons/Folder';
-import { JSX } from 'react/jsx-runtime';
+import {JSX} from 'react/jsx-runtime';
 import {getCategoryList} from "../../services/category";
 import {ICategory} from "../../types/category";
+import {ListItemButton} from "@mui/material";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -70,13 +68,21 @@ export default function Category() {
                                     return (
                                         <div key={index}>
                                             <ListItem>
-                                                <ListItemIcon>
-                                                    <FolderIcon />
-                                                </ListItemIcon>
-                                                <ListItemText
-                                                    primary = {item.categoryName}
-                                                    secondary={secondary ? item.categoryDesc : null}
-                                                />
+                                                <ListItemButton
+                                                    dense={true}
+                                                    onClick={()=> {
+                                                        console.log(item.id)
+                                                    }
+                                                }
+                                                >
+                                                    <ListItemIcon>
+                                                        <FolderIcon />
+                                                    </ListItemIcon>
+                                                    <ListItemText
+                                                        primary = {item.categoryName}
+                                                        secondary={secondary ? item.categoryDesc : null}
+                                                    />
+                                                </ListItemButton>
                                             </ListItem>
                                         </div>
                                     )

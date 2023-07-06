@@ -90,16 +90,28 @@ type ArticleInfo struct {
 }
 
 // GetArticlesList 获取文章列表（分页）
-func (Articles) GetArticlesList(pageNum int64, pageSize int64, keywords string) interface{} {
+func (Articles) GetArticlesList(pageNum int64, pageSize int64, keywords string, categoryId int64) interface{} {
 	offset := (pageNum - 1) * pageSize
 	var count int64
 	var articleItem []ArticleItem
+	query := utils.DB.Table("articles").Select("id").Where("(title LIKE ? or abstract LIKE ?) and status = ?", keywords+"%", keywords+"%", "normal")
+	// 条件判断分类id
+	if categoryId != 0 {
+		query.Where("category_id = ?", categoryId)
+	}
 	// 查总数
-	if err := utils.DB.Table("articles").Select("id").Where("(title LIKE ? or abstract LIKE ?) and status = ?", keywords+"%", keywords+"%", "normal").Scan(&articleItem).Count(&count).Error; err != nil {
+	if err := query.Scan(&articleItem).Count(&count).Error; err != nil {
 		return nil
 	}
 	// 分页查询
-	if err := utils.DB.Table("articles").Select("articles.id, articles.title, articles.cover_img, articles.abstract, articles.views, articles.create_time, category.category_name").Joins("left join category on category.id = articles.category_id").Offset(int(offset)).Limit(int(pageSize)).Where("(articles.title LIKE ? or articles.abstract LIKE ?) and articles.status = ?", keywords+"%", keywords+"%", "normal").Order("articles.id desc").Scan(&articleItem).Error; err != nil {
+	queryContent := utils.DB.Table("articles").Select("articles.id, articles.title, articles.cover_img, articles.abstract, articles.views, articles.create_time, category.category_name").Joins("left join category on category.id = articles.category_id").Offset(int(offset)).Limit(int(pageSize)).Order("articles.id desc")
+	// 条件判断分类id
+	if categoryId != 0 {
+		queryContent.Where("(articles.title LIKE ? or articles.abstract LIKE ?) and articles.status = ? and articles.category_id = ?", keywords+"%", keywords+"%", "normal", categoryId)
+	} else {
+		queryContent.Where("(articles.title LIKE ? or articles.abstract LIKE ?) and articles.status = ?", keywords+"%", keywords+"%", "normal")
+	}
+	if err := queryContent.Scan(&articleItem).Error; err != nil {
 		return nil
 	} else {
 		totalPage := utils.ReturnTotalPage(count, pageSize)

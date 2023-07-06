@@ -4,8 +4,6 @@ import {getArticlesDetail} from "../../services/article";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import {BlogInfo} from "../../types/blog";
-import ReactMarkdown from "react-markdown";
-import gfm from 'remark-gfm'
 import OmsViewMarkdown from "../../components/OmsViewMarkdown";
 
 const BlogDetail = () => {
