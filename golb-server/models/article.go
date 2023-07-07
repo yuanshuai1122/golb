@@ -94,7 +94,12 @@ func (Articles) GetArticlesList(pageNum int64, pageSize int64, keywords string, 
 	offset := (pageNum - 1) * pageSize
 	var count int64
 	var articleItem []ArticleItem
-	query := utils.DB.Table("articles").Select("id").Where("(title LIKE ? or abstract LIKE ?) and status = ?", keywords+"%", keywords+"%", "normal")
+	query := utils.DB.Table("articles").Select("id")
+	query.Where("status = ?", "normal")
+	// 条件判断模糊查询
+	if keywords != "" {
+		query.Where("title LIKE ? or abstract LIKE ?", "%"+keywords+"%", "%"+keywords+"%")
+	}
 	// 条件判断分类id
 	if categoryId != 0 {
 		query.Where("category_id = ?", categoryId)
@@ -103,13 +108,17 @@ func (Articles) GetArticlesList(pageNum int64, pageSize int64, keywords string, 
 	if err := query.Scan(&articleItem).Count(&count).Error; err != nil {
 		return nil
 	}
+
 	// 分页查询
 	queryContent := utils.DB.Table("articles").Select("articles.id, articles.title, articles.cover_img, articles.abstract, articles.views, articles.create_time, category.category_name").Joins("left join category on category.id = articles.category_id").Offset(int(offset)).Limit(int(pageSize)).Order("articles.id desc")
+	queryContent.Where("articles.status = ?", "normal")
+	// 条件判断模糊查询
+	if keywords != "" {
+		queryContent.Where("articles.title LIKE ? or articles.abstract LIKE ?", "%"+keywords+"%", "%"+keywords+"%")
+	}
 	// 条件判断分类id
 	if categoryId != 0 {
-		queryContent.Where("(articles.title LIKE ? or articles.abstract LIKE ?) and articles.status = ? and articles.category_id = ?", keywords+"%", keywords+"%", "normal", categoryId)
-	} else {
-		queryContent.Where("(articles.title LIKE ? or articles.abstract LIKE ?) and articles.status = ?", keywords+"%", keywords+"%", "normal")
+		queryContent.Where("category_id = ?", categoryId)
 	}
 	if err := queryContent.Scan(&articleItem).Error; err != nil {
 		return nil
